@@ -7,83 +7,23 @@
                     <h2>Every online tool you need to work in one place </h2>
                 </div>
                 <div class="search-container"><input type="text"
-                        id="search-bar" placeholder="search..." class="ng-untouched ng-pristine ng-valid"></div><br>
+                        id="search-bar" [(ngModel)]="searchTerm" placeholder="search..." class="ng-untouched ng-pristine ng-valid"></div><br>
                 <div class="clearboth"></div>
               <div class="main row">
-                  
-                  <div class="card" style="width: 18rem;">
-                    <a href="" class="anchor">
-                        <img src="https://ezytool.com/assets/img/merge.svg" class="card-img-top" alt="...">
+                  <ng-container *ngFor="let item of filteredData">
+                    
+                    <div class="card" style="width: 18rem;">
+                      <a href="" class="anchor">
+                        <img [src]="item.image" class="card-img-top" alt="...">
                         
                         <div class="card-body">
-                            <h5 class="card-title">Merge Pdf</h5>
-                            <p class="card-text">Combine Pdf in easiest way on in the order you want merger available.</p>
+                          <h5 class="card-title">{{item.title}}</h5>
+                          <p class="card-text">{{item.body}}</p>
                         </div>
-                    </a>
+                      </a>
                     </div>
-                    <div class="card" style="width: 18rem;">
-                        <a href="" class="anchor">
-                    <img src="https://ezytool.com/assets/img/pdftoimg.svg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Split Pdf</h5>
-                      <p class="card-text">Combine Pdf in easiest way on in the order you want merger available.</p>
-                    </div>
-                </a>
-                  </div>
-                  <div class="card" style="width: 18rem;">
-                    <a href="" class="anchor">
-                    <img src="https://ezytool.com/assets/img/ocr.svg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </a>
-                  </div>
-                  <div class="card" style="width: 18rem;">
-                    <a href="" class="anchor">
-                    <img src="https://ezytool.com/assets/img/emi-calculate.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </a>
-                  </div>
-                  <div class="card" style="width: 18rem;">
-                    <a href="" class="anchor">
-                    <img src="https://ezytool.com/assets/img/ocr.svg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </a>
-                  </div>
-                  <div class="card" style="width: 18rem;">
-                    <a href="" class="anchor">
-                    <img src="https://ezytool.com/assets/img/emi-calculate.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </a>
-                  </div>
-                  <div class="card" style="width: 18rem;">
-                    <a href="" class="anchor">
-                    <img src="https://ezytool.com/assets/img/weight-scale.svg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </a>
-                  </div>
-                  <div class="card" style="width: 18rem;">
-                    <a href="" class="anchor">
-                    <img src="https://ezytool.com/assets/img/weight-scale.svg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </a>
-                  </div>
+                  </ng-container>
+             
               </div>
             </div>
         </div>

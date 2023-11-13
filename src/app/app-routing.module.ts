@@ -17,6 +17,11 @@ const routes: Routes = [
             pathMatch:'full',
             loadChildren:()=>import('./modules/home/home.module').then(m=>m.HomeModule)
           },
+          {
+            path:'image-crawler',
+            loadChildren:()=>import('./modules/image-crawler/image-crawler.module').then( m=> m.ImageCrawlerModule)
+          }
+         
         
   ]
 }];

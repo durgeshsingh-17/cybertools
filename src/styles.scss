@@ -5,3 +5,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
+.full-width-box.index-title {
+    background-image: url('/assets/images/background.jpg');
+    // background-color: aliceblue;
+    background-size: cover;
+    background-attachment: fixed;
+}

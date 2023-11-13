@@ -1,0 +1,19 @@
+<div class="full-width-box index-title">
+
+    <div class="container">
+        <div class="search-container">
+            <div class="head-text">
+                <span>Single Site</span>
+            </div>
+        <div class="search-box">
+            <input type="text" class="search-input">
+        </div>
+    </div>
+
+    <div *ngFor="let imageUrl of imageUrls">
+        <img [src]="imageUrl" alt="Image" />
+        <button (click)="downloadImage(imageUrl)">Download</button>
+      </div>
+
+</div>
+</div>

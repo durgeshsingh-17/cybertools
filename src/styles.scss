@@ -1,7 +1,68 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
+
+@font-face {
+  font-family: 'PROXIMA_NOVA_MEDIUM';
+  src: url('assets/fonts/PROXIMA NOVA MEDIUM.OTF');
+}
+
+@font-face {
+  font-family: 'PROXIMA_NOVA_BLACK';
+  src: url('assets/fonts/PROXIMANOVABLACK.OTF');
+}
+
+@font-face {
+  font-family: 'PROXIMA_NOVA_BOLD';
+  src: url('assets/fonts/PROXIMANOVABOLD.OTF');
+}
+
+@font-face {
+  font-family: 'PROXIMANOVA_EXRA_BOLD';
+  src: url('assets/fonts/PROXIMANOVAEXRABOLD.OTF');
+}
+
+@font-face {
+  font-family: 'PROXIMA_NOVA_LIGH';
+  src: url('assets/fonts/PROXIMANOVALIGH.TTF');
+}
+
+@font-face {
+  font-family: 'PROXIMA_NOVA_LIGHT';
+  src: url('assets/fonts/PROXIMANOVALIGHT.TTF');
+}
+
+@font-face {
+  font-family: 'PROXIMA_NOVA_MEDIUM';
+  src: url('assets/fonts/PROXIMANOVAMEDIUM.OTF');
+}
+
+@font-face {
+  font-family: 'PROXIMA_NOVA_REG';
+  src: url('assets/fonts/PROXIMANOVAREG.OTF');
+}
+
+@font-face {
+  font-family: 'PROXIMA_NOVA_SEMIBOLD';
+  src: url('assets/fonts/PROXIMANOVASEMIBOLD.OTF');
+}
+
+@font-face {
+  font-family: 'PROXIMA_NOVA_THIN';
+  src: url('assets/fonts/PROXIMANOVATHIN.OTF');
+}
+
+.mdc-dialog__surface {
+  overflow: hidden !important;
+}

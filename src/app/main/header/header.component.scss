@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #e7f2fd;
+    transition: all 0.5s ease;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 30px;
+    z-index: 1000;
+    box-shadow: rgb(1, 1, 1) 0px 1px 7px 0px;
+}
+
+.logo_item {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.navbar img {
+    width: 80px;
+    height: 35px;
+    object-fit: cover;
+}
+
+.navbar_content {
+    display: flex;
+    align-items: center;
+    column-gap: 25px;
+}
+
+.navbar_content i {
+    cursor: pointer;
+    font-size: 20px;
+}
+
+a {
+    font-family: 'PROXIMA_NOVA_SEMIBOLD';
+    text-decoration: none;
+    color: #333;
+}
+
+a:hover {
+    color: #e5322d;
+    cursor: pointer;
+}
+
+li:hover {
+    font-family: 'PROXIMA_NOVA_SEMIBOLD';
+    color: #e5322d;
+    cursor: pointer;
+}
+
+li {
+    font-family: 'PROXIMA_NOVA_SEMIBOLD';
+}
+
+text {
+    font-family: 'PROXIMA_NOVA';
+    font-size: 24px;
+    fill: #0077cc;
+}

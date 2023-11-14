@@ -1,1 +1,32 @@
-<p>header works!</p>
+<div style="margin-bottom: 95px;">
+    <nav class="navbar">
+        <div class="logo_item">
+            <img src="../../../assets/images/cybertools-logo2.jpg" alt="">
+        </div>
+        <ul class="navbar_content" style="list-style: none;">
+            <li>
+                <a routerLink="merge_pdf">MERGE PDF</a>
+            </li>
+            <li>
+                <a routerLink="split_pdf">SPLIT PDF</a>
+            </li>
+            <li>
+                <a routerLink="compress_pdf">COMPRESS PDF</a>
+            </li>
+            <!-- <li>
+                <a routerLink="javascript:void(0)" (mouseenter)="onMouseEnter()">CONVERT PDF
+                    <i class="fa-solid fa-caret-down"></i>
+                </a>
+            </li> -->
+            <li (click)="openDialog()">ALL PDF TOOL
+                <i class="fa-solid fa-caret-down"></i>
+            </li>
+        </ul>
+
+        <div class="navbar_content">
+            <!-- <i class='bx bx-sun' id="darkLight"></i> -->
+            <i class='bx bx-bell'></i>
+            <!-- <img src="images/profile.jpg" alt="" class="profile" /> -->
+        </div>
+    </nav>
+</div>

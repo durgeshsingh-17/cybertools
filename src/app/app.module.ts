@@ -8,6 +8,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MainComponent } from './main/main.component';
 import { FooterComponent } from './main/footer/footer.component';
 import { HeaderComponent } from './main/header/header.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import {MatMenuModule} from '@angular/material/menu';
+import { OpenDialogComponent } from './main/open-dialog/open-dialog.component';
 
 
 @NgModule({
@@ -16,13 +20,17 @@ import { HeaderComponent } from './main/header/header.component';
     MainComponent,
     FooterComponent,
     HeaderComponent,
+    OpenDialogComponent,
     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NgbModule
+    NgbModule,
+    MatDialogModule,
+    MatMenuModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

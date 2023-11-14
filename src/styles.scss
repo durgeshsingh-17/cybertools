@@ -66,3 +66,9 @@ body {
 .mdc-dialog__surface {
   overflow: hidden !important;
 }
+.full-width-box.index-title {
+    background-image: url('/assets/images/background.jpg');
+    // background-color: aliceblue;
+    background-size: cover;
+    background-attachment: fixed;
+}

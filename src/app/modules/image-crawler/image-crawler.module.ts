@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { HomeRoutingModule } from './home-routing.module';
-import { HomeComponent } from './home.component';
+import { ImageCrawlerRoutingModule } from './image-crawler-routing.module';
+import { ImageCrawlerComponent } from './image-crawler.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
   declarations: [
-    HomeComponent
+    ImageCrawlerComponent
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule,
+    ImageCrawlerRoutingModule,
     SharedModule
   ]
 })
-export class HomeModule { }
+export class ImageCrawlerModule { }

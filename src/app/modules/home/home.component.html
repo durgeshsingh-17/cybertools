@@ -7,177 +7,24 @@
                     <h2>Every online tool you need to work in one place </h2>
                 </div>
                 <div class="search-container"><input type="text"
-                        id="search-bar" placeholder="search..." class="ng-untouched ng-pristine ng-valid"></div><br
-                   >
+                        id="search-bar" [(ngModel)]="searchTerm" placeholder="search..." class="ng-untouched ng-pristine ng-valid"></div><br>
                 <div class="clearboth"></div>
-                <nav class="tools-list no-select">
-                    <ul>
-                        <li><a class="item" href="/mergepdf"><span
-                                   ><i class="icon"><img
-                                            src="assets/img/merge.svg" alt="Merge PDF"></i><br
-                                       ><span>Merge PDF</span><span
-                                        class="description">Combine PDFs in the order you want
-                                        with the easiest PDF merger available.</span></span></a></li>
-                        <li><a class="item" href="/splitpdf"><span
-                                   ><i class="icon"><img
-                                            src="assets/img/split.svg" alt="Split  PDF"></i><br
-                                       ><span>Split PDF</span><span
-                                        class="description">Separate one page or a whole set for
-                                        easy conversion into independent PDF files.</span></span></a></li>
-                        <li><a class="item" href="/pdf-to-img"><span
-                                   ><i class="icon"><img
-                                            src="assets/img/pdftoimg.svg"
-                                            alt="PDF to Image "></i><br><span
-                                       >PDF to Image </span><span
-                                        class="description">Convert each PDF page into a JPG or extract all images
-                                        contained in a PDF.</span></span></a></li>
-                        <li><a class="item" href="/img-to-pdf"><span
-                                   ><i class="icon"><img
-                                            src="assets/img/imgtopdf.svg"
-                                            alt="Image to PDF"></i><br><span
-                                       >Image to PDF</span><span
-                                        class="description">Convert JPG images to PDF in seconds. Easily adjust
-                                        orientation and margins.</span></span></a></li>
-                        <li><a class="item" href="/ocr"><span
-                                   ><i class="icon"><img
-                                            src="assets/img/ocr.svg" alt="OCR"></i><br
-                                       ><span>OCR</span><span
-                                        class="description">Extract text from images and convert
-                                        into editable Text</span></span></a></li>
-                        <li><a class="item" href="/qrcode"><span
-                                   ><i class="icon"><img
-                                            src="assets/img/qr-code-scan.svg"
-                                            alt="QR Code Generator"></i><br><span
-                                       >QR Code Generator</span><span
-                                        class="description">Content is directly encoded in the QR code
-                                        image.</span></span></a></li>
-                        <li><a class="item" href="/caseconverter"><span
-                                   ><i class="icon"><img
-                                            src="assets/img/font-size.svg"
-                                            alt="Case Converter"></i><br><span
-                                       >Case Converter</span><span
-                                        class="description">Simply enter your text and choose the case you want to
-                                        convert.</span></span></a></li>
-                        <li><a class="item" href="/wordcount"><span
-                                   ><i class="icon"><img
-                                            src="assets/img/number.svg" alt="Word Counter"></i><br
-                                       ><span>Word Counter</span><span
-                                        class="description">Count words, characters, sentences,
-                                        paragraphs in real time.</span></span></a></li>
-                        <li><a class="item" href="/myip"><span
-                                   ><i class="icon"><img
-                                            src="assets/img/ip.svg" alt="Find My IP"></i><br
-                                       ><span>Find My IP</span><span
-                                        class="description">Check Your IP address information with
-                                        location, city, region, country.</span></span></a></li>
-                        <li><a class="item" href="/percentcalculator"><span
-                                   ><i class="icon"><img
-                                            src="assets/img/p-calculator.svg"
-                                            alt="Percent Calculator"></i><br><span
-                                       >Percent Calculator</span><span
-                                        class="description">calculate percentages easily be it simple or
-                                        complex</span></span></a></li>
-                        <li><a class="item" href="/agecalculator"><span
-                                   ><i class="icon"><img
-                                            src="assets/img/age.svg" alt="Age Calculator"></i><br
-                                       ><span>Age Calculator</span><span
-                                        class="description">calculate age or interval between two
-                                        dates.</span></span></a></li>
-                        <li><a class="item" href="/length-converter"><span
-                                   ><i class="icon"><img
-                                            src="assets/img/length.svg"
-                                            alt="Length Converter"></i><br><span
-                                       >Length Converter</span><span
-                                        class="description">calculator for metric and imperial units including KM, Mil,
-                                        Me, Feet and Inches.</span></span></a></li>
-                        <li><a class="item" href="/speed-converter"><span
-                                   ><i class="icon"><img
-                                            src="assets/img/speed.svg"
-                                            alt="Speed Converter"></i><br><span
-                                       >Speed Converter</span><span
-                                        class="description">Complete list of speed units for conversion
-                                    </span></span></a></li>
-                        <li><a class="item"
-                                href="/temperature-converter"><span><i
-                                        class="icon"><img src="assets/img/thermometer.svg"
-                                            alt="Temperature Converter"></i><br><span
-                                       >Temperature Converter</span><span
-                                        class="description">Temperature degrees conversions of Fahrenheit, Celsius,
-                                        Kelvin.</span></span></a></li>
-                        <li><a class="item" href="/weight-converter"><span
-                                   ><i class="icon"><img
-                                            src="assets/img/weight-scale.svg"
-                                            alt="Weight Converter"></i><br><span
-                                       >Weight Converter</span><span
-                                        class="description">Weight converter for units including Kilograms, Pounds,
-                                        Grams, Ounces, Stones etc</span></span></a></li>
-                        <li><a class="item" href="/currency-converter"><span
-                                   ><i class="icon"><img
-                                            src="assets/img/rupees.svg"
-                                            alt="Currency Converter"></i><br><span
-                                       >Currency Converter</span><span
-                                        class="description">Calculate live currency and foreign exchange rates with the
-                                        free.</span></span></a></li>
-                        <li><a class="item" href="/emi-calculator"><span
-                                   ><i class="icon"><img
-                                            src="assets/img/emi-calculate.png"
-                                            alt="EMI Calculator"></i><br><span
-                                       >EMI Calculator</span><span
-                                        class="description">It helps you calculate the EMI required to pay for your
-                                        home, car</span></span></a></li>
-                        <li><a class="item" href="/bmi-calculator"><span
-                                   ><i class="icon"><img
-                                            src="assets/img/BMI-scale.png"
-                                            alt="BMI Calculator"></i><br><span
-                                       >BMI Calculator</span><span
-                                        class="description">Calculate Your Body Mass Index</span></span></a></li>
-                        <li><a class="item" href="/world-clock"><span
-                                   ><i class="icon"><img
-                                            src="assets/img/clock.png" alt="World Clock"></i><br
-                                       ><span>World Clock</span><span
-                                        class="description">Check current local time around the
-                                        world with our customizable international clock.</span></span></a></li>
-                        <li><a class="item" href="/num-to-word"><span
-                                   ><i class="icon"><img
-                                            src="assets/img/n2w.png" alt="Number to Words"></i><br
-                                       ><span>Number to Words</span><span
-                                        class="description">This tool will get your number are
-                                        converted in words.</span></span></a></li>
-                        <li><a class="item" href="/password-generator"><span
-                                   ><i class="icon"><img
-                                            src="assets/img/password.png"
-                                            alt="Passwords Generator"></i><br><span
-                                       >Passwords Generator</span><span
-                                        class="description">To prevent your passwords from being hacked by social
-                                        engineering,</span></span></a></li>
-                        <li><a class="item" href="/url-encode-decode"><span
-                                   ><i class="icon"><img
-                                            src="assets/img/url-enco-deco.png"
-                                            alt="URL Encoder &amp; Decoder"></i><br><span
-                                       >URL Encoder &amp; Decoder</span><span
-                                        class="description">Input a string of text and encode or
-                                        decode it as you like.</span></span></a></li>
-                        <li><a class="item"
-                                href="/base64-encode-decode"><span><i
-                                        class="icon"><img src="assets/img/base64.png"
-                                            alt="Base64 Encoder &amp; Decoder"></i><br><span
-                                       >Base64 Encoder &amp; Decoder</span><span
-                                        class="description">Base64 is a group of binary-to-text
-                                        encoding schemes that represent binary data in an ASCII</span></span></a></li>
-                        <li><a class="item" href="/xml-to-json"><span
-                                   ><i class="icon"><img
-                                            src="assets/img/json.png" alt="XML to JSON"></i><br
-                                       ><span>XML to JSON</span><span
-                                        class="description">It helps to convert your XML data to
-                                        JSON format</span></span></a></li>
-                        <li><a class="item" href="/json-to-xml"><span
-                                   ><i class="icon"><img
-                                            src="assets/img/xml.png" alt="JSON to XML"></i><br
-                                       ><span>JSON to XML</span><span
-                                        class="description">It helps to convert your JSON data to
-                                        XML format</span></span></a></li><!---->
-                    </ul>
-                </nav>
+              <div class="main row">
+                  <ng-container *ngFor="let item of filteredData">
+                    
+                    <div class="card" style="width: 18rem;">
+                      <a href="" class="anchor" routerLink="{{item.routerlink}}">
+                        <img [src]="item.image" class="card-img-top" alt="...">
+                        
+                        <div class="card-body">
+                          <h5 class="card-title">{{item.title}}</h5>
+                          <p class="card-text">{{item.body}}</p>
+                        </div>
+                      </a>
+                    </div>
+                  </ng-container>
+             
+              </div>
             </div>
         </div>
     </div>

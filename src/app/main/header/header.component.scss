@@ -1,74 +1,101 @@
-* {
-    margin: 0;
-    padding: 0;
+li,
+a {
+    padding: 5px 0;
+    text-decoration: none;
+    color: rgb(15, 13, 13);
+    ;
 }
 
-body {
-    background-color: #e7f2fd;
-    transition: all 0.5s ease;
+li,
+a:hover {
+    color: #e5322d;
 }
 
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 30px;
-    z-index: 1000;
+.bg-primary {
+    background-color: #fff !important;
     box-shadow: rgb(1, 1, 1) 0px 1px 7px 0px;
 }
 
-.logo_item {
-    display: flex;
-    align-items: center;
-    column-gap: 10px;
-    font-size: 22px;
-    font-weight: 500;
+.navbar-brand,
+.nav-link {
+    color: rgb(15, 13, 13);
+    font-family: 'PROXIMA_NOVA_MEDIUM';
 }
 
-.navbar img {
-    width: 80px;
-    height: 35px;
-    object-fit: cover;
-}
-
-.navbar_content {
-    display: flex;
-    align-items: center;
-    column-gap: 25px;
-}
-
-.navbar_content i {
-    cursor: pointer;
-    font-size: 20px;
-}
-
-a {
-    font-family: 'PROXIMA_NOVA_SEMIBOLD';
-    text-decoration: none;
-    color: #333;
-}
-
-a:hover {
+.nav-link:hover {
     color: #e5322d;
-    cursor: pointer;
 }
 
-li:hover {
-    font-family: 'PROXIMA_NOVA_SEMIBOLD';
+.navbar-toggler {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show {
     color: #e5322d;
-    cursor: pointer;
 }
 
-li {
+.navbar .megamenu {
+    padding: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    font-family: 'PROXIMA_NOVA_MEDIUM';
+}
+
+h4 {
     font-family: 'PROXIMA_NOVA_SEMIBOLD';
 }
 
-text {
-    font-family: 'PROXIMA_NOVA';
-    font-size: 24px;
-    fill: #0077cc;
+.dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 30%;
+    transform: translateX(-50%);
+    border-width: 0 10px 10px 10px;
+    border-style: solid;
+    border-color: transparent transparent #ffffff transparent;
 }
+
+.navbar > .container, .navbar > .container-fluid, .navbar > .container-sm, .navbar > .container-md, 
+.navbar > .container-lg, .navbar > .container-xl, .navbar > .container-xxl {
+    display: flex;
+    flex-wrap: inherit;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+// ============ desktop view ============
+@media all and (min-width: 992px) {
+
+    .navbar .has-megamenu {
+        position: static !important;
+    }
+
+    .navbar .megamenu {
+        left: 0;
+        right: 0;
+        width: 100%;
+        margin-top: 0;
+    }
+
+}
+
+// ============ desktop view .end// ============
+
+
+// ============ mobile view ============
+@media(max-width: 991px) {
+
+    .navbar.fixed-top .navbar-collapse,
+    .navbar.sticky-top .navbar-collapse {
+        overflow-y: auto;
+        max-height: 90vh;
+        margin-top: 10px;
+    }
+
+    .desktop-item {
+        display: none;
+    }
+}
+
+// ============ mobile view .end// ============

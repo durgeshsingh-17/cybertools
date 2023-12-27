@@ -23,7 +23,7 @@ export class PdfToImageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.currentpage = 1
+    this.currentpage = 1;
   }
 
   uploadFile(event: any) {
@@ -38,7 +38,8 @@ export class PdfToImageComponent implements OnInit {
         reader.readAsArrayBuffer($img.files[0]);
       }
     } else {
-      alert('please upload pdf file')
+      alert('please upload pdf file');
+      console.log("ashu")
     }
   }
 

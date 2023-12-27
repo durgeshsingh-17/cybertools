@@ -1,31 +1,24 @@
-<div class="full-width-box index-title">
-    <div class="container">
-        <div class="hero-wrapper">
-            <div class="hero text-center" style="height: 1689px;">
-                <div class="title text-center">
-                    <h1>Solutions to Your File Problems</h1>
-                    <h2>Every online tool you need to work in one place </h2>
-                </div>
-                <div class="search-container"><input type="text"
-                        id="search-bar" [(ngModel)]="searchTerm" placeholder="search..." class="ng-untouched ng-pristine ng-valid"></div><br>
-                <div class="clearboth"></div>
-              <div class="main row">
-                  <ng-container *ngFor="let item of filteredData">
-                    
-                    <div class="card" style="width: 18rem;">
-                      <a href="" class="anchor" routerLink="{{item.routerlink}}">
-                        <img [src]="item.image" class="card-img-top" alt="...">
-                        
-                        <div class="card-body">
-                          <h5 class="card-title">{{item.title}}</h5>
-                          <p class="card-text">{{item.body}}</p>
-                        </div>
-                      </a>
-                    </div>
-                  </ng-container>
-             
-              </div>
-            </div>
-        </div>
+<div class="container">
+  <div class="text-center">
+    <div class="text-center">
+      <h1 class="title">Solutions to Your File Problems</h1>
+      <h2>Every online tool you need to work in one place </h2>
     </div>
+    <div>
+      <input type="search" id="search-bar" [(ngModel)]="searchTerm" placeholder="search Tools..." autocomplete="off">
+    </div>
+  </div>
+  <div class="row py-5">
+    <div class="col-12 col-lg-3 col-md-4 col-sm-6" *ngFor="let item of filteredData">
+      <div class="card my-2 py-2">
+        <a routerLink="{{item.routerlink}}">
+          <img [src]="item.image" class="ms-3" width="45px" alt="...">
+          <div class="card-body">
+            <span class="card-title">{{item.title}}</span>
+            <p class="card-text">{{item.body}}</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
 </div>

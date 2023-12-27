@@ -1,68 +1,52 @@
-.tool-list{
-    margin: 0 auto;
+.card {
+  box-shadow: 2px 4px 12px rgba(0, 0, 0, .08);
+  transition: all .3s cubic-bezier(0, 0, .5, 1);
 }
-.tool-list ul li {
-    width: 25%;
-}
-
-
-ul{
-    list-style-type:none;
-}
-
-.card .card-img-top{
-    width: 25%;
-    margin: 1rem auto;
-}
-.card{
-    margin:0.5rem;
-    background-color:#ffffff;
-      border-radius: 10px;
-      box-shadow: 2px 4px 12px rgba(0,0,0,.08);
-      transition: all .3s cubic-bezier(0,0,.5,1);
-}
-
-// .anchor:hover{
-// margin-top: -7px;
-// // box-shadow: 2px 2px 2px;
-// }
 
 .card:hover {
-    transform: translateY(-10px); /* Move the card up */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Show a larger box shadow */
-  }
-  a{
-    text-decoration: none;
-    color: black;
-  }
+  transform: translateY(-10px); // Move the card up
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); // Show a larger box shadow
+}
 
-  .main{
-    display: flex;
+a {
+  text-decoration: none;
+  color: black;
+}
+
+#search-bar {
+  border-radius: 14px;
+  height: 55px;
+  width: 400px;
+  padding: 0 16px;
+  background-repeat: no-repeat;
+  box-shadow: 0 10px 35px 0 rgb(0 0 0/9%);
+  border: 1px solid #eee;
+  font-family: 'PROXIMA_NOVA_MEDIUM';
+}
+
+@media(max-width: 424px) and (min-width: 180px) {
+  #search-bar {
+    width: 75%;
   }
+}
 
-   #search-bar{
-    background: #fff;
-    border-radius: 14px;
-    font-size: 14px;
-    line-height: 1.5;
-    color: #525658;
-    height: 55px;
-    width: 35%;
-    padding: 0 16px;
-    background-position: 22px;
-    background-size: 19px;
-    background-repeat: no-repeat;
-    box-shadow: 0 10px 35px 0 rgb(0 0 0/9%);
-    border: 1px solid #eee;
-    font-family: Poppins,sans-serif;
+#search-bar:focus {
+  border: 1px solid #e5322d;
+  outline-color: transparent;
+}
 
-  }
+.title {
+  font-size: 45px;
+  line-height: 69px;
+  margin: 20px 0 0;
+  font-family: 'PROXIMA_NOVA_SEMIBOLD';
+}
 
-  .index-title .title h1 {
-    font-size: 45px;
-    line-height: 69px;
-    letter-spacing: 0;
-    margin: 20px 0 0;
-    font-weight: 900;
-    font-family: Poppins,sans-serif;
+.card-title {
+  font-size: 20px;
+  font-family: 'PROXIMA_NOVA_SEMIBOLD';
+}
+
+.card-text {
+  font-family: 'PROXIMA_NOVA_MEDIUM';
 }

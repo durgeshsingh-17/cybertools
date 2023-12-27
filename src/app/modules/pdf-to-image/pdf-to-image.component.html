@@ -1,25 +1,25 @@
-<div class="fileUploadDiv">
-    <label for="formFile" class="form-label"> Please Select File:</label>
-    <input class="form-control" type="file" id="upload-doc" accept=".pdf" (change)="uploadFile($event)">
 
-    <div *ngIf="isPdfUploaded" class="button-div">
-        <div class="page-div">
-            <button (click)="previous()" class="btn btn-success">
-                <i class="fa fa-angle-left font-weight-bold" aria-hidden="true"></i>
-            </button>
-            <p class="pagescount">Pages - {{currentpage}} of {{totalPages}}</p>
-            <button (click)="next()" class="btn btn-success">
-                <i class="fa fa-angle-right font-weight-bold" aria-hidden="true"></i>
-            </button>
-        </div>
-        <button (click)="downloadFile()" class="btn btn-primary button-margin">Download</button>
+<app-choose-file (onSend)="onFetch($event)" [ashu]="title"></app-choose-file>
+<div *ngIf="isPdfUploaded" class="button-div">
+    <div class="page-div">
+        <button (click)="previous()" class="btn btn-success">
+            <i class="fa fa-angle-left font-weight-bold" aria-hidden="true"></i>
+        </button>
+        <p class="pagescount">Pages - {{currentpage}} of {{totalPages}}</p>
+        <button (click)="next()" class="btn btn-success">
+            <i class="fa fa-angle-right font-weight-bold" aria-hidden="true"></i>
+        </button>
     </div>
+    <button (click)="downloadFile()" class="btn btn-primary button-margin">Download</button>
 </div>
-
 <div class="pdf-container top-margin" [hidden]="isCropImage">
-    <pdf-viewer [src]="pdfSrc" [render-text]="true" [page]="currentpage" [original-size]="false" [fit-to-page]="false"
+    <ng-container *ngIf="pdfSrc">
+    
+
+        <pdf-viewer [src]="pdfSrc" [render-text]="true" [page]="currentpage" [original-size]="false" [fit-to-page]="false"
         (after-load-complete)="afterLoadComplete($event)" style="width: 420px; height: 570px">
     </pdf-viewer>
+</ng-container>
 </div>
 
 <div class="img-container" [hidden]="!isCropImage">

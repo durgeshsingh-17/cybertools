@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PDFDocumentProxy } from 'ng2-pdf-viewer';
 import html2canvas from 'html2canvas';
-import { HttpClient } from '@angular/common/http';
-import { saveAs } from 'file-saver';
 
 @Component({
-  selector: 'app-pdf-to-image',
-  templateUrl: './pdf-to-image.component.html',
-  styleUrls: ['./pdf-to-image.component.scss']
+  selector: 'app-choose-file',
+  templateUrl: './choose-file.component.html',
+  styleUrls: ['./choose-file.component.scss']
 })
-export class PdfToImageComponent implements OnInit {
-
-  title:string = 'pdf-to-image';
-  pdfSrc :string   = "";
+export class ChooseFileComponent implements OnInit {
+  @Input() ashu!:string
+  @Output() onSend : EventEmitter<{pdfSrc:string,hidepage:boolean}> = new EventEmitter;
+  title = 'pdf-to-image';
+  pdfSrc = "";
   totalPages: number = 0;
   currentpage: number = 0;
   isCropImage: boolean = false;
@@ -24,11 +24,9 @@ export class PdfToImageComponent implements OnInit {
 
   ngOnInit() {
     this.currentpage = 1;
+    console.log(this.ashu)
   }
-  onFetch(item:any){
-    this.pdfSrc = item.pdfSrc;
-    this.isPdfUploaded = item.hidepage;
-  }
+
   uploadFile(event: any) {
     let $img: any = document.querySelector('#upload-doc');
     if (event.target.files[0].type == 'application/pdf') {
@@ -36,6 +34,8 @@ export class PdfToImageComponent implements OnInit {
         let reader = new FileReader();
         reader.onload = (e: any) => {
           this.pdfSrc = e.target.result;
+          this.isPdfUploaded=true;
+          this.onSend.emit({pdfSrc:this.pdfSrc,hidepage:this.isPdfUploaded});
         };
         this.isPdfUploaded = true;
         reader.readAsArrayBuffer($img.files[0]);
@@ -45,11 +45,10 @@ export class PdfToImageComponent implements OnInit {
       console.log("ashu")
     }
   }
-
-  afterLoadComplete(pdf: PDFDocumentProxy) {
-    this.totalPages = pdf.numPages;
-    console.log(this.totalPages);
-  }
+ 
+  // afterLoadComplete(pdf: PDFDocumentProxy) {
+  //   this.totalPages = pdf.numPages;
+  // }
 
   downloadFile() {
     html2canvas(document.querySelector(".pdf-container") as HTMLElement).then((canvas: any) => {

@@ -15,6 +15,7 @@ import { OpenDialogComponent } from './main/open-dialog/open-dialog.component';
 import { PdfToImageComponent } from './modules/pdf-to-image/pdf-to-image.component'
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { HttpClientModule } from '@angular/common/http';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatMenuModule,
     MatButtonModule,
     PdfViewerModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

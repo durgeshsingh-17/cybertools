@@ -23,6 +23,10 @@ const routes: Routes = [
             loadChildren:()=>import('./modules/image-crawler/image-crawler.module').then( m=> m.ImageCrawlerModule)
           },
           { path: 'pdf-to-image', component: PdfToImageComponent },
+          {
+            path:'pdf-merge',
+            loadChildren:()=>import('./modules/pdf-merge/pdf-merge.module').then(m=>m.PdfMergeModule),
+          }
          
         
   ]

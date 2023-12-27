@@ -6,14 +6,15 @@
                 <span>Single Site</span>
             </div>
         <div class="search-box">
-            <input type="text" class="search-input">
+            <input type="text" class="search-input" [(ngModel)] = "webLink" >
+            <button (click)="fetchImages()">Extract</button>
         </div>
     </div>
 
-    <div *ngFor="let imageUrl of imageUrls">
+    <!-- <div *ngFor="let imageUrl of imageUrls">
         <img [src]="imageUrl" alt="Image" />
         <button (click)="downloadImage(imageUrl)">Download</button>
-      </div>
+      </div> -->
 
 </div>
 </div>

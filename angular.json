@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "cybertools:build:production"
+              "buildTarget": "cybertools:build:production"
             },
             "development": {
-              "browserTarget": "cybertools:build:development"
+              "buildTarget": "cybertools:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "cybertools:build"
+            "buildTarget": "cybertools:build"
           }
         },
         "test": {

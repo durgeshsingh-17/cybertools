@@ -1,0 +1,13 @@
+<div>
+    <input type="file" (change)="onFileSelected($event)" />
+    <br />
+    <label>Page Range (comma-separated): </label>
+    <input type="text" [(ngModel)]="pageRange" >
+    <br />
+    <button (click)="splitPDF()">Split PDF</button>
+    <br />
+    <!-- <div *ngFor="let page of splitPages">
+      
+      {{ page.getText() }}
+    </div> -->
+  </div>

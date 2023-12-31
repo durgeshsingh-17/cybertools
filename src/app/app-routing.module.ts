@@ -26,6 +26,14 @@ const routes: Routes = [
           {
             path:'pdf-merge',
             loadChildren:()=>import('./modules/pdf-merge/pdf-merge.module').then(m=>m.PdfMergeModule),
+          },
+          {
+            path:'pdf-split',
+            loadChildren:()=>import('./modules/pdf-split/pdf-split.module').then(m=>m.PdfSplitModule),
+          },
+          {
+            path:'pdf-rotate',
+            loadChildren:()=>import('./modules/pdf-rotate/pdf-rotate.module').then(m=>m.PdfRotateModule),
           }
          
         

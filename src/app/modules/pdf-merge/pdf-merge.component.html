@@ -1,6 +1,11 @@
-<div class="container">
-    <form action="" [formGroup]="pdfMerge">
-        <input type="file" formControlName="pdf">
-        <button (click)="onSubmit()">Upload</button>
-    </form>
+<div class="container">  
+
+    <input type="file" (change)="onFileSelected($event)" multiple>
+    <button class="btn" (click)="onUpload()">Upload</button>
 </div>
+<ng-container *ngIf="downloadLink">
+    <a (click)="downLoad()">
+        Download Merge
+    </a>
+    
+</ng-container>

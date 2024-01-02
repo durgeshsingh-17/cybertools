@@ -34,6 +34,10 @@ const routes: Routes = [
           {
             path:'pdf-rotate',
             loadChildren:()=>import('./modules/pdf-rotate/pdf-rotate.module').then(m=>m.PdfRotateModule),
+          },
+          {
+            path:'img-pdf',
+            loadChildren:()=>import('./modules/img-pdf/img-pdf.module').then(m=>m.ImgPdfModule),
           }
          
         

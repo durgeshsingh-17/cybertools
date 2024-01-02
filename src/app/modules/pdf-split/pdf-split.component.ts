@@ -9,7 +9,7 @@ export class PdfSplitComponent {
   selectedFile: File | null = null;
   pageRange: string = '';
   splitPages: PDFPage[] = [];
-
+  link:any;
   seprate:boolean = false;
 
   onFileSelected(event: any): void {
@@ -72,11 +72,11 @@ export class PdfSplitComponent {
   private downloadFile(data: Uint8Array, filename: string): void {
     const blob = new Blob([data], { type: 'application/pdf' });
     const url = window.URL.createObjectURL(blob);
-
     const a = document.createElement('a');
     a.href = url;
     a.download = filename;
     document.body.appendChild(a);
+    this.link = a;
     a.click();
     document.body.removeChild(a);
     window.URL.revokeObjectURL(url);

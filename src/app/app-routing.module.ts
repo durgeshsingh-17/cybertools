@@ -34,6 +34,10 @@ const routes: Routes = [
           {
             path:'pdf-rotate',
             loadChildren:()=>import('./modules/pdf-rotate/pdf-rotate.module').then(m=>m.PdfRotateModule),
+          },
+          {
+            path:'pdf-remove',
+            loadChildren:()=>import('./modules/pdf-remove-page/pdf-remove-page.module').then(m=>m.PdfRemovePageModule),
           }
          
         

@@ -1,1 +1,8 @@
-<p>pdf-remove-page works!</p>
+<input type="file" (change)="onFileSelected($event)" />
+@if(pdfSrc){
+    {{pdfSrc}}
+    <pdf-viewer [src]="pdfSrc" [render-text]="true" [original-size]="false" [fit-to-page]="false"
+    (after-load-complete)="afterLoadComplete($event)" style="width: 420px; height: 570px" ></pdf-viewer>
+}
+
+<!-- <ng2-pdf-viewer [src]="pdfSrc" *ngIf="pdfSrc"></ng2-pdf-viewer> -->

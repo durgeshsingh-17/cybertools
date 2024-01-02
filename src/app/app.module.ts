@@ -36,7 +36,6 @@ import { SharedModule } from './shared/shared.module';
     MatDialogModule,
     MatMenuModule,
     MatButtonModule,
-    PdfViewerModule,
     HttpClientModule,
     SharedModule
   ],

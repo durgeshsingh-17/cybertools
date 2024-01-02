@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { PdfRemovePageRoutingModule } from './pdf-remove-page-routing.module';
 import { PdfRemovePageComponent } from './pdf-remove-page.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { PdfRemovePageComponent } from './pdf-remove-page.component';
   ],
   imports: [
     CommonModule,
-    PdfRemovePageRoutingModule
+    PdfRemovePageRoutingModule,
+    SharedModule
   ]
 })
 export class PdfRemovePageModule { }

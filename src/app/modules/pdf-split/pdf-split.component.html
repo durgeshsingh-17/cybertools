@@ -10,4 +10,19 @@
       
       {{ page.getText() }}
     </div> -->
+
+    <!-- <ngx-extended-pdf-viewer
+    [src]="'path-to-your-pdf-file.pdf'"
+    style="display: block; height: 500px;"
+    (pdfLoaded)="onPdfLoaded($event)"
+  ></ngx-extended-pdf-viewer>
+  <div *ngIf="numPages > 0">
+    <p>Total Pages: {{ numPages }}</p>
+    <div *ngFor="let page of pagesArray">
+      <ngx-extended-pdf-viewer
+        [src]="'path-to-your-pdf-file.pdf'"
+        [page]="page"
+        style="display: block; height: 500px;"
+      ></ngx-extended-pdf-viewer> -->
+      <pdf-viewer [src]="this.link"></pdf-viewer>
   </div>

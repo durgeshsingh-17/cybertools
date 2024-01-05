@@ -75,7 +75,7 @@ export class CommonService {
   displayAlertDialog(options?: any) {
     let global_options = {
       autoFocus: false,
-      panelClass: 'modhyobitto-dialog-container',
+      panelClass: 'cyberTool-dialog-container',
       scrollStrategy: this.overlay.scrollStrategies.noop()
     };
     let dialog_config = { ...global_options, ...options };
@@ -100,7 +100,7 @@ export class CommonService {
       let snackar_ref = this.snackbar.open(
         message || this.error_messages.service_failure,
         'OK',
-        { panelClass: 'modhyobitto-snackbar' });
+        { panelClass: 'cyberTool-snackbar' });
       this.setGlobalData('global_snackbar', snackar_ref);
     }, 1200);
   }

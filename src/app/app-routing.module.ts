@@ -28,7 +28,7 @@ const routes: Routes = [
             loadChildren:()=>import('./modules/pdf-merge/pdf-merge.module').then(m=>m.PdfMergeModule),
           },
           {
-            path:'pdf-split',
+            path:'split-pdf',
             loadChildren:()=>import('./modules/pdf-split/pdf-split.module').then(m=>m.PdfSplitModule),
           },
           {

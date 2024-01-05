@@ -1,0 +1,101 @@
+.cyberTool-file-uploader {
+    background-color: #eee;
+    border: 2px dashed #7cb342;
+    padding: 3rem;
+}
+
+.files-for-upload {
+    margin-bottom: 3rem;
+}
+
+.selected-file {
+    border-radius: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.selected-file:not(:last-of-type) {
+    margin-bottom: 1rem;
+}
+
+.mat-expansion-panel-header {
+    cursor: default;
+    height: auto;
+    padding: 0;
+}
+
+.mat-expansion-panel-header[aria-disabled=true] {
+    color: inherit;
+}
+
+.selected-file-header {
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+:host ::ng-deep .mat-content {
+    display: block !important;
+    flex: 1 !important;
+    overflow: hidden;
+}
+
+.selected-file-name {
+    color: #4b830d;
+    overflow: hidden;
+    padding: 0 1.5rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.selected-file-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.selected-file-actions button {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    padding: 0 15px;
+}
+
+.mat-expansion-panel-header.mat-expanded .selected-file-header {
+    border-bottom: solid 1px #000;
+}
+
+.mat-expansion-panel-header .mat-content {
+    display: block;
+}
+
+.mat-expansion-panel-body { 
+    padding-top: 1rem;
+}
+
+.mat-expansion-panel-body .selected-file-upload-error {
+    color: #b00020;
+}
+
+.file-uploader-instructions {
+    color: #7cb342;
+    margin-bottom: 3rem;
+    padding: 0 1rem;
+    text-align: center;
+}
+
+.file-upload-options {
+    display: flex;
+    justify-content: center;
+}
+
+.cyberTool-file-uploader .file-upload-options button.all-file-upload,
+.cyberTool-file-uploader .file-upload-options button.all-file-cancel {
+    display: flex;
+    align-items: center;
+    border-left: 2px solid #eee;
+    min-width: 0;
+    padding: 0 15px;
+}
+
+.file-upload-options .file-upload-native-selection {
+    display: none;
+}

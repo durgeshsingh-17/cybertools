@@ -9,3 +9,19 @@
     </a>
     
 </ng-container>
+
+<ng-container *ngIf="pdfSrc">
+    <div class="pdfContainer">
+<!-- {{pdfPages}} -->
+        <ng-container *ngFor="let item of pdfPages">
+            
+            <div class="pdfView">
+                <button (click)="rotatePage(item)">Rotate</button>
+                <pdf-viewer [src]="pdfSrc" [rotation]="180"  [render-text]="true" [page]="item+1" [original-size]="false" [fit-to-page]="true"
+                style="width:100%; height: 100%;" [show-all]="false" (after-load-complete)="afterLoadComplete($event)" >
+            </pdf-viewer>
+        </div>
+    </ng-container> 
+</div>
+
+</ng-container>

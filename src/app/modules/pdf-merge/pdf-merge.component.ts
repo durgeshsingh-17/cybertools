@@ -12,12 +12,14 @@ export class PdfMergeComponent implements OnInit{
   pdfMerge !:FormGroup;
   selectedFile!: File  ;
   selectedFile1!: File ;
+  mergedPdf!:PDFDocument;
   pdfSrc:any;
   pdfPages:any;
    link!:string;
    downloadLink:boolean = false;
    mergedPdfData:any;
    rotationArray: { rotate: number; degree: number }[] = [];
+   removeArray: any[] = [];
    constructor(private fb:FormBuilder,private http: HttpClient){
  
    }
@@ -28,92 +30,115 @@ export class PdfMergeComponent implements OnInit{
   }
 
   async onFileSelected(event: any): Promise<void> {
-    const file1 = event.target.files[0] as File;
-    const file2 = event.target.files[1] as File;
-    this.selectedFile = file1;
-    this.selectedFile1 = file2;
+    const files = event.map((e: any) => e.file as File);
+  
+    if (files.length === 0) {
+      return;
+    }
+  
+    const pdfDataArray: Uint8Array[] = [];
+  
+    for (const file of files) {
+      const pdfData = await this.readFileAsArrayBuffer(file);
+      pdfDataArray.push(new Uint8Array(pdfData));
+    }
+  
+    try {
+      this.mergedPdfData = await this.mergePdfs(...pdfDataArray);
+  
+      const blob = new Blob([this.mergedPdfData], { type: 'application/pdf' });
+      const dataUrl = URL.createObjectURL(blob);
+      this.pdfSrc = dataUrl;
+     
+    } catch (error) {
+      console.error('Error merging PDFs:', error);
+    }
   }
   
-  private readFileAsArrayBuffer(file: File): Promise<ArrayBuffer> {
+  
+  async readFileAsArrayBuffer(file: File): Promise<ArrayBuffer> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-      reader.onload = (event: any) => {
-        resolve(event.target.result);
+      reader.onload = (event) => {
+        if (event.target) {
+          const arrayBuffer = (event.target.result as ArrayBuffer);
+          resolve(arrayBuffer);
+        } else {
+          reject(new Error('Error reading file as ArrayBuffer.'));
+        }
       };
-      reader.onerror = (event) => {
-        reject(event);
-      };
-      reader.readAsArrayBuffer(file);
+
+      const blob = new Blob([file]);
+      reader.readAsArrayBuffer(blob);
     });
   }
-  async mergePdfs(pdfData1: Uint8Array, pdfData2: Uint8Array): Promise<Uint8Array> {
-    try {
-
-      const pdfDoc1 = await PDFDocument.load(pdfData1);
-      const pdfDoc2 = await PDFDocument.load(pdfData2);
-      const mergedPdf = await PDFDocument.create();
-      const pages1 = await mergedPdf.copyPages(pdfDoc1, pdfDoc1.getPageIndices());
-      const pages2 = await mergedPdf.copyPages(pdfDoc2, pdfDoc2.getPageIndices());
   
-      for (const page of pages1) {
-        console.log("Ashu")
-        mergedPdf.addPage(page);
-      }
+  async mergePdfs(...pdfDataArray: Uint8Array[]): Promise<Uint8Array> {
+    try {
       
-      for (const page of pages2) {
-        console.log("kumar")
-      
-
-        mergedPdf.addPage(page);
-      }
-      if (this.rotationArray.length > 0) {
-        let pageIndicesToModify = this.rotationArray.map(item => item.rotate);
-       
-        let pagesToModify = await mergedPdf.copyPages(mergedPdf, pageIndicesToModify);
-          console.log(pagesToModify);
-        for (let i = 0; i < pagesToModify.length; i++) {
-          const cpage = pagesToModify[i];
-          const rotationInfo = this.rotationArray.find(item => item.rotate === pageIndicesToModify[i]);
-      
-          if (rotationInfo) {
-            cpage.setRotation(degrees(rotationInfo.degree));
-            const pageIndex = pageIndicesToModify[i];
-            mergedPdf.removePage(pageIndex);
-            mergedPdf.insertPage(pageIndex, pagesToModify[i]);
+         this.mergedPdf = await PDFDocument.create();
+    
+        for (const pdfData of pdfDataArray) {
+          let pdfDoc = await PDFDocument.load(pdfData);
+          let pages = await this.mergedPdf.copyPages(pdfDoc, pdfDoc.getPageIndices());
+    
+          for (let page of pages) {
+            this.mergedPdf.addPage(page);
           }
         }
-      }
 
-      this.pdfPages = mergedPdf.getPageIndices();
 
-      console.log( mergedPdf.getPageIndices());
-      const mergedPdfBytes = await mergedPdf.save();
+     
+      this.pdfPages = this.mergedPdf.getPageIndices();
+
+      
+      const mergedPdfBytes = await this.mergedPdf.save();
       return mergedPdfBytes;
     } catch (error) {
       console.error('Error merging PDFs:', error);
       throw error;
     }
   }
-  async onUpload(): Promise<void> {
-    if (this.selectedFile && this.selectedFile1) {
-      const pdfData1 = await this.selectedFile.arrayBuffer();
-      const pdfData2 = await this.selectedFile1.arrayBuffer();
-      try {
-         this.mergedPdfData = await this.mergePdfs(new Uint8Array(pdfData1), new Uint8Array(pdfData2));
-         const blob = new Blob([this.mergedPdfData], { type: 'application/pdf' });
-         const dataUrl = URL.createObjectURL(blob);
-         this.pdfSrc = dataUrl;
-         this.downloadLink = true;
-        } catch (error) {
-          console.error('Error merging PDFs:', error);
-        }
-    } else {
-      console.warn('Please select two PDF files.');
-    }
-  }
-  downLoad(){
+ async megedPDF(){
+    if (this.rotationArray.length > 0) {
+      let pageIndicesToModify = this.rotationArray.map(item => item.rotate);
+     
+      let pagesToModify = await this.mergedPdf.copyPages(this.mergedPdf, pageIndicesToModify);
+        console.log(pagesToModify);
+      for (let i = 0; i < pagesToModify.length; i++) {
+        let cpage = pagesToModify[i];
+        let rotationInfo = this.rotationArray.find(item => item.rotate === pageIndicesToModify[i]);
     
-    console.log(this.rotationArray);
+        if (rotationInfo) {
+          cpage.setRotation(degrees(rotationInfo.degree));
+          let pageIndex = pageIndicesToModify[i];
+          this.mergedPdf.removePage(pageIndex);
+          this.mergedPdf.insertPage(pageIndex, pagesToModify[i]);
+        }
+      }
+    }
+  
+ 
+    this.pdfPages = this.mergedPdf.getPageIndices();
+      
+    let mergedPdfBytes = await this.mergedPdf.save();
+    this.downloadLink = true;
+    this.mergedPdfData =  mergedPdfBytes;
+  }
+
+  async removePages(){
+    if(this.removeArray.length >0){
+      for(let i = 0; i<this.removeArray.length;i++){
+        console.log(this.removeArray[i])
+          this.mergedPdf.removePage(this.removeArray[i]);
+      }
+    }
+    let mergedPdfBytes = await this.mergedPdf.save();
+    this.downloadLink = true;
+    return  mergedPdfBytes;
+  }
+ async downLoad(){this
+    this.mergedPdfData = await this.removePages();
     const blob = new Blob([this.mergedPdfData], { type: 'application/pdf' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
@@ -121,24 +146,27 @@ export class PdfMergeComponent implements OnInit{
     this.link = link.href;
     link.click();
   }
-  afterLoadComplete(pdf: PDFDocumentProxy) {
-    // this.totalPages = pdf.numPages;
-    // console.log(this.totalPages);
-  }
-
+  
   rotatePage(index:number){
     let existingRotationIndex = this.rotationArray.findIndex(item => item.rotate === index);
     
     if (existingRotationIndex !== -1) {
-      // If rotation for this index already exists, modify the existing entry
       this.rotationArray[existingRotationIndex].degree = (this.rotationArray[existingRotationIndex].degree + 90) % 360;
     } else {
-      // If rotation for this index does not exist, add a new entry
       this.addRotationInfo(index, 90);
     }
-    this.onUpload();
   }
   addRotationInfo(rotate: number, degree: number): void {
     this.rotationArray.push({ rotate,degree });
+  }
+  removePage(index:number){
+    if(!this.removeArray.includes(index)){
+      this.removeArray.push(index); 
+    } else{
+     let indexToRemove = this.removeArray.indexOf(index);
+     this.removeArray.splice(indexToRemove, 1);
+    } 
+  }
+  afterLoadComplete(pdf: PDFDocumentProxy) {
   }
 }

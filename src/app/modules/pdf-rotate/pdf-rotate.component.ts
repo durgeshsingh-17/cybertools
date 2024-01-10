@@ -1,94 +1,157 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { PDFDocument, degrees } from 'pdf-lib';
+import { PDFDocumentProxy } from 'ng2-pdf-viewer';
 @Component({
   selector: 'app-pdf-rotate',
   templateUrl: './pdf-rotate.component.html',
   styleUrls: ['./pdf-rotate.component.scss']
 })
-export class PdfRotateComponent {
-  rotatedPdfLink: string | null = null;
+export class PdfRotateComponent implements OnInit {
+  pdfMerge !:FormGroup;
+  selectedFile!: File  ;
+  selectedFile1!: File ;
+  mergedPdf!:PDFDocument;
+  pdfSrc:any;
+  pdfPages:any;
+   link!:string;
+   downloadLink:boolean = false;
+   mergedPdfData:any;
+   rotationArray: { rotate: number; degree: number }[] = [];
+   removeArray: any[] = [];
+   constructor(private fb:FormBuilder,private http: HttpClient){
+ 
+   }
+  ngOnInit(): void {
+    this.pdfMerge = this.fb.group({
+      pdf:[""],
+    })
+  }
 
-  constructor() {}
-  // async rotatePdf(inputPdfBuffer: ArrayBuffer, outputRotation: number): Promise<ArrayBuffer> {
-  //   // const pdfDoc = await pdfjs.getDocument({ data: inputPdfBuffer }).promise;
-  //   const numPages = pdfDoc.numPages;
+  async onFileSelected(event: any): Promise<void> {
+    const files = event.map((e: any) => e.file as File);
+  
+    if (files.length === 0) {
+      return;
+    }
+  
+    const pdfDataArray: Uint8Array[] = [];
+  
+    for (const file of files) {
+      const pdfData = await this.readFileAsArrayBuffer(file);
+      pdfDataArray.push(new Uint8Array(pdfData));
+    }
+  
+    try {
+      this.mergedPdfData = await this.mergePdfs(...pdfDataArray);
+  
+      const blob = new Blob([this.mergedPdfData], { type: 'application/pdf' });
+      const dataUrl = URL.createObjectURL(blob);
+      this.pdfSrc = dataUrl;
+     
+    } catch (error) {
+      console.error('Error merging PDFs:', error);
+    }
+  }
+  
+  
+  async readFileAsArrayBuffer(file: File): Promise<ArrayBuffer> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        if (event.target) {
+          const arrayBuffer = (event.target.result as ArrayBuffer);
+          resolve(arrayBuffer);
+        } else {
+          reject(new Error('Error reading file as ArrayBuffer.'));
+        }
+      };
 
-  //   const canvas = document.createElement('canvas');
-  //   const context = canvas.getContext('2d') as CanvasRenderingContext2D; // Type assertion here
+      const blob = new Blob([file]);
+      reader.readAsArrayBuffer(blob);
+    });
+  }
+  
+  async mergePdfs(...pdfDataArray: Uint8Array[]): Promise<Uint8Array> {
+    try {
+      
+         this.mergedPdf = await PDFDocument.create();
+    
+        for (const pdfData of pdfDataArray) {
+          let pdfDoc = await PDFDocument.load(pdfData);
+          let pages = await this.mergedPdf.copyPages(pdfDoc, pdfDoc.getPageIndices());
+    
+          for (let page of pages) {
+            this.mergedPdf.addPage(page);
+          }
+        }
 
-  //   const promises = [];
 
-  //   for (let pageNumber = 1; pageNumber <= numPages; pageNumber++) {
-  //     // const page = await pdfDoc.getPage(pageNumber);
-  //     const viewport = page.getViewport({ scale: 1 });
+     
+      this.pdfPages = this.mergedPdf.getPageIndices();
 
-  //     canvas.width = viewport.width;
-  //     canvas.height = viewport.height;
+      
+      const mergedPdfBytes = await this.mergedPdf.save();
+      return mergedPdfBytes;
+    } catch (error) {
+      console.error('Error merging PDFs:', error);
+      throw error;
+    }
+  }
+ async megedPDF(){
+    if (this.rotationArray.length > 0) {
+      let pageIndicesToModify = this.rotationArray.map(item => item.rotate);
+     
+      let pagesToModify = await this.mergedPdf.copyPages(this.mergedPdf, pageIndicesToModify);
+        console.log(pagesToModify);
+      for (let i = 0; i < pagesToModify.length; i++) {
+        let cpage = pagesToModify[i];
+        let rotationInfo = this.rotationArray.find(item => item.rotate === pageIndicesToModify[i]);
+    
+        if (rotationInfo) {
+          cpage.setRotation(degrees(rotationInfo.degree));
+          let pageIndex = pageIndicesToModify[i];
+          this.mergedPdf.removePage(pageIndex);
+          this.mergedPdf.insertPage(pageIndex, pagesToModify[i]);
+        }
+      }
+    }
+  
+ 
+    this.pdfPages = this.mergedPdf.getPageIndices();
+      
+    let mergedPdfBytes = await this.mergedPdf.save();
+    this.downloadLink = true;
+    this.mergedPdfData =  mergedPdfBytes;
+  }
 
-  //     await page.render({ canvasContext: context, viewport }).promise;
 
-  //     context.clearRect(0, 0, canvas.width, canvas.height);
-  //     canvas.width = viewport.height;
-  //     canvas.height = viewport.width;
+ async downLoad(){this
+    
+    const blob = new Blob([this.mergedPdfData], { type: 'application/pdf' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'merged.pdf';
+    this.link = link.href;
+    link.click();
+  }
+  
+  rotatePage(index:number){
+    let existingRotationIndex = this.rotationArray.findIndex(item => item.rotate === index);
+    
+    if (existingRotationIndex !== -1) {
+      this.rotationArray[existingRotationIndex].degree = (this.rotationArray[existingRotationIndex].degree + 90) % 360;
+    } else {
+      this.addRotationInfo(index, 90);
+    }
+  }
+  addRotationInfo(rotate: number, degree: number): void {
+    this.rotationArray.push({ rotate,degree });
+  }
 
-  //     if (outputRotation !== 0) {
-  //       context.translate(canvas.width / 2, canvas.height / 2);
-  //       context.rotate((outputRotation * Math.PI) / 180);
-  //       context.drawImage(canvas, -canvas.width / 2, -canvas.height / 2);
-  //       context.setTransform(1, 0, 0, 1, 0, 0);
-  //     } else {
-  //       context.drawImage(canvas, 0, 0);
-  //     }
-
-  //     const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-  //     promises.push(Promise.resolve(imageData.data.buffer));
-  //   }
-
-  //   const rotatedPdfBuffer = await Promise.all(promises);
-
-  //   // Combine rotated images into a single PDF
-  //   const mergedPdfDoc = await pdfjs.getDocument({ data: rotatedPdfBuffer[0] }).promise;
-  //   const mergedPdfBuffer = await mergedPdfDoc.getData();
-
-  //   return mergedPdfBuffer;
-  // }
-  // async rotatePdfSubmit(event: Event) {
-  //   const inputElement = event.target as HTMLInputElement;
-  //   if (inputElement.files && inputElement.files.length > 0) {
-  //     const inputFile = inputElement.files[0];
-
-  //     try {
-  //       // console.log(Ashu);
-  //       const inputPdfBuffer = await this.readFileAsArrayBuffer(inputFile);
-
-       
-  //       const rotatedPdfBuffer = await this.rotatePdf(inputPdfBuffer, 90);
-
-  //       // Save or use the rotated PDF buffer as needed
-  //       this.saveRotatedPdf(rotatedPdfBuffer);
-  //     } catch (error) {
-  //       console.error('Error processing PDF:', error);
-  //     }
-  //   }
-  // }
-
-  // private async readFileAsArrayBuffer(file: File): Promise<ArrayBuffer> {
-  //   return new Promise<ArrayBuffer>((resolve, reject) => {
-  //     const reader = new FileReader();
-  //     reader.onload = () => resolve(reader.result as ArrayBuffer);
-  //     reader.onerror = reject;
-  //     reader.readAsArrayBuffer(file);
-  //   });
-  // }
-
-  // private saveRotatedPdf(pdfBuffer: ArrayBuffer) {
-  //   const blob = new Blob([pdfBuffer], { type: 'application/pdf' });
-  //   const url = URL.createObjectURL(blob);
-  //   console.log(url);
-  //   this.rotatedPdfLink = url;
-  // }
+  afterLoadComplete(pdf: PDFDocumentProxy) {
+  }
 }
-function rotate(radians: number): import("pdf-lib").Rotation {
-  throw new Error('Function not implemented.');
-}
+
 

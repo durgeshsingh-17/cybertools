@@ -15,7 +15,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { DragAndDropDirective } from './drag-and-drop-directive/drag-and-drop.directive';
-
+import { FeatherModule } from 'angular-feather';
+import * as all from 'angular-feather/icons';
+const icons = {
+ ...all,
+};
 @NgModule({
   declarations: [
     ChooseFileComponent,
@@ -29,7 +33,7 @@ import { DragAndDropDirective } from './drag-and-drop-directive/drag-and-drop.di
     HttpClientModule,
     PdfViewerModule,
    
-    
+    // FeatherModule.pick(icons),
 
     MatRippleModule,
     MatSnackBarModule,
@@ -48,7 +52,7 @@ import { DragAndDropDirective } from './drag-and-drop-directive/drag-and-drop.di
     ReactiveFormsModule,
     HttpClientModule,
     PdfViewerModule,
-
+    // FeatherModule,
     MatRippleModule,
     MatSnackBarModule,
     MatNativeDateModule,

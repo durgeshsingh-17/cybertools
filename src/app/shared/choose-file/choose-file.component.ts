@@ -113,9 +113,9 @@ export class ChooseFileComponent implements OnInit, OnDestroy {
     isUploadInProgress: boolean,
     uploadResult: any
   }[] = [];
-
+  newselectedFiles: File[] = [];
   @ViewChild("fileSelector", { static: false }) file_selector!: ElementRef;
-
+@Output() sendForm = new EventEmitter<any>;
   file_selection_form: FormGroup;
   private file_selection_sub!: Subscription;
   private file_upload_sub!: Subscription;
@@ -189,12 +189,12 @@ export class ChooseFileComponent implements OnInit, OnDestroy {
       }
     });
   }
-
+  
   uploadAll() {
+    this.sendForm.emit(this.selectedFiles);
     let countSelectedFile = this.selectedFiles.length;
     for (let i = 0; i < countSelectedFile; i++) {
       let selected_file = this.selectedFiles[i];
-      console.log('selected_file ###', selected_file)
       if (!selected_file.isUploadInProgress && selected_file.uploadResult != 'success') {
         this.uploadFile(i);
       }

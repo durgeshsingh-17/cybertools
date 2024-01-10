@@ -55,7 +55,7 @@
                     <button mat-raised-button matRipple (click)="openFileSelector()">
                         Select PDF Files
                     </button>
-                    <ng-container *ngIf="selectedFiles.length>1">
+                    <ng-container *ngIf="selectedFiles.length>0">
                         <button mat-raised-button color="accent" matRipple matTooltip="Upload All"
                             matTooltipPosition="above" aria-label="Upload All Files" (click)="uploadAll()"
                             [disabled]="!isAnyFileNotUploaded()">
